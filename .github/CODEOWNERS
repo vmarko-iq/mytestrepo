@@ -1,0 +1,7 @@
+# Global reviewers for any change to dev or prod
+# (GitHub rulesets require 1 approval; this ensures they are pinged)
+*          @gvmarko-iq
+
+# Folder-specific owners
+/dir1/     @vmarko-iq
+/dir2/     @vmarko-iq
