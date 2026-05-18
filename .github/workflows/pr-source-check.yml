@@ -1,0 +1,30 @@
+name: PR Source Branch Validator
+
+on:
+  pull_request:
+    branches:
+      - prod
+      - dev
+
+jobs:
+  validate-source:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check dev source branch
+        if: github.base_ref == 'dev'
+        run: |
+          SRC_BRANCH="${{ github.head_ref }}"
+          if [[ ! "$SRC_BRANCH" =~ ^features/ ]]; then
+            echo "ERROR: Changes to 'dev' must come from a 'features/*' branch."
+            exit 1
+          fi
+
+      - name: Check prod source branch
+        if: github.base_ref == 'prod'
+        run: |
+          SRC_BRANCH="${{ github.head_ref }}"
+          if [[ "$SRC_BRANCH" != "dev" && ! "$SRC_BRANCH" =~ ^hotfix/ ]]; then
+            echo "ERROR: Changes to 'prod' must come from 'dev' or a 'hotfix/*' branch."
+            exit 1
+          fi
+          
