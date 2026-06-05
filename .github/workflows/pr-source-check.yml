@@ -3,7 +3,7 @@ name: PR Source Branch Validator
 on:
   pull_request:
     branches:
-      - prod
+#      - prod
       - dev
 
 jobs:
